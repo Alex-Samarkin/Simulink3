@@ -7,6 +7,8 @@
 // 
 // 5:15 09 04 2022
 
+using System;
+
 namespace TSimClassLib
 {
     public class TBlockWithPorts:TBlock,TBlockInterface
@@ -18,21 +20,44 @@ namespace TSimClassLib
 
         #region Implementation of TBlockInterface
 
-        public void Init()
+        public override void Init()
         {
-            throw new System.NotImplementedException();
+            PortsIN.ClearData();
+            PortsOUT.ClearData();
+            PortsParam.ClearData();
+            PortsTemporaryData.ClearData();
+            
+            // throw new System.NotImplementedException();
+            Console.WriteLine($"Init BlockWithPorts, {(TTitle)this}");
         }
 
-        public void Reset()
+        public override void Reset()
         {
-            throw new System.NotImplementedException();
+            PortsIN.ClearData();
+            PortsOUT.ClearData();
+            PortsParam.ClearData();
+            PortsTemporaryData.ClearData();
+
+            // throw new System.NotImplementedException();
+            Console.WriteLine($"Reset BlockWithPorts, {(TTitle)this}");
         }
 
-        public void Run()
+        public override void Run()
         {
-            throw new System.NotImplementedException();
+            // throw new System.NotImplementedException();
+            Console.WriteLine($"Run BlockWithPorts, {(TTitle)this}");
         }
 
         #endregion
+
+        public virtual void ToConsole()
+        {
+            Console.WriteLine((TTitle)this);
+            Console.WriteLine("---------------------");
+            PortsIN.ToConsole();
+            PortsOUT.ToConsole();
+            PortsParam.ToConsole();
+            PortsTemporaryData.ToConsole();
+        }
     }
 }

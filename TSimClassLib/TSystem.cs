@@ -19,6 +19,8 @@ namespace TSimClassLib
 
         public List<TBlock> Blocks { get; set; } = new List<TBlock>();
 
+        public List<TConnector> Connectors { get; set; } = new List<TConnector>();
+
         public void AddBlock(TBlock block)
         {
             block.Id = Blocks.Count;

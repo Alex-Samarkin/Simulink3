@@ -18,7 +18,7 @@ namespace TSimClassLib
         /// инициализация
         /// </summary>
         void Init();
-        
+
         /// <summary>
         /// сброс настроек на умолчания / начальные настройки (можно сделать Init)
         /// </summary>
@@ -29,5 +29,15 @@ namespace TSimClassLib
         /// </summary>
         void Run();
 
+        /// <summary>
+        /// установка параметров (после init)
+        /// Init - устанавливает параметры в 0
+        /// SetParams - ставит значения параметров для начала расчета
+        /// Reset - восстанавливает начальные значения ПОСЛЕ SetParams
+        /// Run - предполагается, что параметры установлены
+        ///
+        /// рекомендуется реализация reset в виде Init-SetParams
+        /// </summary>
+        void SetParams();
     }
 }

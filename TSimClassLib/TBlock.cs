@@ -22,17 +22,17 @@ namespace TSimClassLib
 
         #region Implementation of TBlockInterface
 
-        public void Init()
+        public virtual void Init()
         {
             Console.WriteLine($"Init block {((TTitle)this).ToString()}");
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             Console.WriteLine($"Reset block {((TTitle)this).ToString()}");
         }
 
-        public void Run()
+        public virtual void Run()
         {
             if (Owner!=null)
             {
@@ -40,7 +40,12 @@ namespace TSimClassLib
                 Console.WriteLine($"Into system {Owner.ToString()} by Time {Owner.SimTimer.CurrentTime}");
                 return;
             }
-            Console.WriteLine("No systemes");
+            Console.WriteLine("No owner system");
+        }
+
+        public virtual void SetParams()
+        {
+            Console.WriteLine("Nothin to setup");
         }
 
         #endregion

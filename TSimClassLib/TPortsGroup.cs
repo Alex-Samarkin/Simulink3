@@ -7,6 +7,7 @@
 // 
 // 4:55 09 04 2022
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -49,6 +50,15 @@ namespace TSimClassLib
         public string ZLabel { get => ZPort.Label; set => ZPort.Label = value; }
         public string TimeLabel { get => TimePort.Label; set => TimePort.Label = value; }
 
+        public void AddPort(TPort p = null,string shortDesc=null,string longDesc=null)
+        {
+            string sd = shortDesc ?? "";
+            string ld = longDesc ?? "";
+            TPort p1 = p ?? new TPort(){ShortDescr=sd,LongDescr = ld};
+            p.Id = Ports.Count;
+            Ports.Add(p);
+        }
+
         public void AddX(double value = 0, string label = "")
         {
             XPort.Add(value,label??"");
@@ -66,6 +76,47 @@ namespace TSimClassLib
             TimePort.Add(value, label ?? "");
         }
 
+        public TPort GetPortByDescription(TDescription descr, bool CreateNew = false)
+        {
+            foreach (TPort port in Ports)
+            {
+                if ((TDescription)port == descr)
+                {
+                    return port; 
+                }
+            }
 
+            if (CreateNew || Ports.Count ==0)
+            {
+                AddPort();
+            }
+
+            return Ports[Ports.Count - 1];
+        }
+
+        public TPortsGroup(int value = 0, string shortDescr = null, string longDescr = null) : 
+            base(value, shortDescr, longDescr)
+        {
+
+        }
+
+        public void ClearData()
+        {
+            foreach (TPort port in Ports)
+            {
+                port.ClearData();
+            }
+        }
+
+        public void ToConsole()
+        {
+            Console.WriteLine((TDescription)this);
+            Console.WriteLine("----------------------");
+            foreach (TPort port in Ports)
+            {
+                port.ToConsole();
+            }
+            Console.WriteLine("----------------------");
+        }
     }
 }

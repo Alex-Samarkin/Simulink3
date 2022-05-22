@@ -36,5 +36,48 @@ namespace TSimClassLib
             DestinationPort.Add(value, label);
         }
 
+        public void Connect(TPort sourcePort, TPort destPort)
+        {
+            SourcePort = sourcePort;
+            DestinationPort = destPort;
+        }
+
+        public void ConnectToPortsGroup(TPortsGroup ports, int index, bool AsSource = true)
+        {
+            TPort p = ports.Ports[index];
+            if (AsSource) SourcePort = p;
+            else DestinationPort = p;
+        }
+        public void ConnectToPortsGroup(TPortsGroup ports, TDescription descr, bool AsSource = true)
+        {
+            TPort p = ports.GetPortByDescription(descr);
+            if (AsSource) SourcePort = p;
+            else DestinationPort = p;
+        }
+
+
+        #region Implementation of TBlockInterface
+
+        public void Init()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Run()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void TBlockInterface.SetParams()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
     }
 }
